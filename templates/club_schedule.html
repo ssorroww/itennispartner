@@ -1,0 +1,29 @@
+<!doctype html>
+<title>iTennisPartner</title>
+[<a href="/sportsmen">База спортсменов</a>] [<a href="/clubs">Список клубов</a>]
+<hr>
+<h1>Расписание для клуба "{{ club.info.name }}"</h1>
+<form action="/clubs/{{ club.info.id }}/schedule" method="get">
+  <input type="text" name="date" placeholder="дата" value="{{ club.date }}">
+  <input type="submit" value="Обновить">
+</form>
+<ul>
+{% for place in club.schedule %}
+  {% if place.timetable %}
+  <li>{{ place.info.name }}
+    <ul>
+      {% for dt in place.timetable %}
+      {% set sportsman = club.sportsmen[dt.player_id] %}
+      <li>
+        {% if sportsman %}
+        {{ sportsman.name }} {{ sportsman.family }}
+        {% else %}
+        Неизвестный спортсмен
+        {% endif %} играет в "{{ dt.datetime }}"
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endif %}
+{% endfor %}
+</ul>

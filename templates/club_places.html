@@ -1,0 +1,22 @@
+<!doctype html>
+<title>iTennisPartner Admin (База клубов)</title>
+[<a href="/sportsmen">База спортсменов</a>] [<a href="/clubs">Список клубов</a>]
+<hr>
+<h1>Корты для клуба "{{ club.info.name }}"</h1>
+
+<table>
+  <tr>
+    <th>Название</th>
+  </tr>
+  {% for place in club.places %}
+  <tr>
+    <td>{{ place.name }}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <form action="/clubs/{{ club.info.id }}/places/create">
+      <td><input type="text" name="name"></td>
+      <td><input type="submit" value="добавить корт"></td>
+    </form>
+  </tr>
+</table>

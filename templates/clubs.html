@@ -1,0 +1,31 @@
+<!doctype html>
+<title>iTennisPartner Admin (База клубов)</title>
+[<a href="/sportsmen">База спортсменов</a>] [Список клубов]
+<hr>
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Адрес</th>
+    <th>Телефон</th>
+    <th></th>
+  </tr>
+  {% for item in clubs.list %}
+  <form action="/clubs/update">
+    <input type="hidden" name="id" value="{{ item.id }}">
+    <tr>
+      <td><input type="text" name="name" value="{{ item.name }}"></td>
+      <td><input type="text" name="address" value="{{ item.address }}"></td>
+      <td><input type="text" name="phone" value="{{ item.phone }}"></td>
+      <td><input type="submit" value="обновить">, <a href="/clubs/{{ item.id }}/places">Корты</a>, <a href="/clubs/{{ item.id }}/schedule">Расписание</a></td>
+    </tr>
+  </form>
+  {% endfor %}
+  <form action="/clubs/create">
+    <tr>
+      <td><input type="text" name="name"></td>
+      <td><input type="text" name="address"></td>
+      <td><input type="text" name="phone"></td>
+      <td><input type="submit" value="создать новый клуб"></td>
+    </tr>
+  </form>
+</table>
